@@ -26,13 +26,30 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             })
         )
         
+        
         if PFUser.current() != nil {
             let storyboard = UIStoryboard(name: "Main", bundle: nil)
             // view controller currently being set in Storyboard as default will be overriden
-            window?.rootViewController = storyboard.instantiateViewController(withIdentifier: "AuthenticatedViewController")
+            window?.rootViewController = storyboard.instantiateViewController(withIdentifier: "HomeViewNav")
         }
  
         return true
+    }
+    
+    func logOut() {
+        PFUser.logOutInBackground(block: { (error) in
+            if let error = error {
+                print(error.localizedDescription)
+            }
+            else{
+                print("Successful logout")
+                
+                let storyboard = UIStoryboard(name: "Main", bundle: nil)
+                let loginViewController = storyboard.instantiateViewController(withIdentifier: "loginViewController")
+                self.window?.rootViewController = loginViewController
+                
+            }
+        })
     }
 
     func applicationWillResignActive(_ application: UIApplication) {

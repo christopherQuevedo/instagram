@@ -18,7 +18,8 @@ class LoginViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        let user = PFUser.current()
+        print(user as Any)
         // Do any additional setup after loading the view.
     }
 
